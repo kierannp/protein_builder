@@ -1,30 +1,5 @@
 import mbuild as mb
 
-aminos = {}
-aminos[('alanine','ala','A')] = 'CC(C(=O)O)N'
-aminos[('arginine','arg','R')] = 'C(C[C@@H](C(=O)O)N)CN=C(N)N'
-aminos[('asparagine' ,'asn', 'N')] = 'C([C@@H](C(=O)O)N)C(=O)N'
-aminos[('aspartic acid', 'asp','D')] = 'C([C@@H](C(=O)O)N)C(=O)O'
-aminos[('cysteine', 'cys', 'C')] = 'C([C@@H](C(=O)O)N)S'
-aminos[('glutamine', 'gln', 'Q')] = 'C(CC(=O)N)[C@@H](C(=O)O)N'
-aminos[('glutamic acid', 'glu', 'E')] = 'C(CC(=O)O)C(C(=O)O)N'
-aminos[('glycine', 'gly', 'G')] = 'C(C(=O)O)N'
-aminos[('histidine', 'his', 'H')] = 'C1=C(NC=N1)C[C@@H](C(=O)O)N'
-aminos[('isoleucine', 'ile', 'I')] = 'CC[C@H](C)[C@@H](C(=O)O)N'
-aminos[('leucine', 'leu', 'L')] = 'CC(C)C[C@@H](C(=O)O)N'
-aminos[('lysine', 'lys', 'K')] = 'C(CCN)C[C@@H](C(=O)O)N'
-aminos[('methionine', 'met', 'M')] = 'CSCC[C@@H](C(=O)O)N'
-aminos[('phenylalanine', 'phe', 'F')] = 'C1=CC=C(C=C1)C[C@@H](C(=O)O)N'
-aminos[('proline', 'pro', 'P')] = 'C1C[C@H](NC1)C(=O)O'
-aminos[('serine', 'ser', 'S')] = 'C([C@@H](C(=O)O)N)O'
-aminos[('threonine', 'thr', 'T')] = 'C[C@H]([C@@H](C(=O)O)N)O'
-aminos[('tryptophan', 'trp', 'W')] = 'C1=CC=C2C(=C1)C(=CN2)C[C@@H](C(=O)O)N'
-aminos[('tyrosine', 'tyr', 'Y')] = 'C1=CC(=CC=C1C[C@@H](C(=O)O)N)O'
-aminos[('valine', 'val', 'V')] = 'CC(C)[C@@H](C(=O)O)N'
-
-just_name = {k[0]:aminos[k] for k in aminos.keys()}
-
-
 class Alanine(mb.Compound):
     def __init__(self):
         super(Alanine, self).__init__()
@@ -61,7 +36,6 @@ class Asparagine(mb.Compound):
         carboxyl_o = asparagine[3]
         self.indices = [amine_h, carboxyl_o]
         
-
 class Aspartic_Acid(mb.Compound):
     def __init__(self):
         super(Aspartic_Acid, self).__init__()
@@ -109,8 +83,7 @@ class Glutamic_Acid(mb.Compound):
         amine_h = [glutamic_acid[17], glutamic_acid[18]]
         carboxyl_o = glutamic_acid[7]
         self.indices = [amine_h, carboxyl_o]
-
-        
+    
 class Glycine(mb.Compound):
     def __init__(self):
         super(Glycine, self).__init__()
@@ -268,10 +241,8 @@ class Valine(mb.Compound):
         self.indices = [amine_h, carboxyl_o]
 
 if __name__ == '__main__':
-    import sys
-    def str_to_class(classname):
-        return getattr(sys.modules[__name__], classname)
-    aa = [i[0].upper()+i[1:] for i in list(just_name.keys())]
+    from .utils import *
+    aa = [i[0].upper()+i[1:] for i in list(aminos.keys())]
     aas = []
     for i in aa:
         if ' ' in i:
