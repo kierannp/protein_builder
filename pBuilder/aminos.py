@@ -1,5 +1,5 @@
 import mbuild as mb
-
+from .all_names import just_name
 class Alanine(mb.Compound):
     def __init__(self):
         super(Alanine, self).__init__()
